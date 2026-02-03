@@ -58,8 +58,8 @@ function Items() {
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Items</h1>
-          <p className="text-muted-foreground">Create and manage your items</p>
+          <h1 className="text-2xl font-bold tracking-tight">项目</h1>
+          <p className="text-muted-foreground">创建并管理您的项目</p>
         </div>
         <AddItem />
       </div>

@@ -39,14 +39,14 @@ export const columns: ColumnDef<ItemPublic>[] = [
   },
   {
     accessorKey: "title",
-    header: "Title",
+    header: "标题",
     cell: ({ row }) => (
       <span className="font-medium">{row.original.title}</span>
     ),
   },
   {
     accessorKey: "description",
-    header: "Description",
+    header: "描述",
     cell: ({ row }) => {
       const description = row.original.description
       return (

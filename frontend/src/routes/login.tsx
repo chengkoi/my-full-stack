@@ -75,7 +75,7 @@ function Login() {
           className="flex flex-col gap-6"
         >
           <div className="flex flex-col items-center gap-2 text-center">
-            <h1 className="text-2xl font-bold">Login to your account</h1>
+            <h1 className="text-2xl font-bold">登录您的账户</h1>
           </div>
 
           <div className="grid gap-4">
@@ -84,7 +84,7 @@ function Login() {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>邮箱</FormLabel>
                   <FormControl>
                     <Input
                       data-testid="email-input"
@@ -104,12 +104,12 @@ function Login() {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center">
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>密码</FormLabel>
                     <RouterLink
                       to="/recover-password"
                       className="ml-auto text-sm underline-offset-4 hover:underline"
                     >
-                      Forgot your password?
+                      忘记密码?
                     </RouterLink>
                   </div>
                   <FormControl>
@@ -125,14 +125,14 @@ function Login() {
             />
 
             <LoadingButton type="submit" loading={loginMutation.isPending}>
-              Log In
+              登 录
             </LoadingButton>
           </div>
 
           <div className="text-center text-sm">
-            Don't have an account yet?{" "}
+            还没有账户？{" "}
             <RouterLink to="/signup" className="underline underline-offset-4">
-              Sign up
+              注册
             </RouterLink>
           </div>
         </form>
