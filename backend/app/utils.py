@@ -1,4 +1,6 @@
 import logging
+import os
+import uuid
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -121,3 +123,78 @@ def verify_password_reset_token(token: str) -> str | None:
         return str(decoded_token["sub"])
     except InvalidTokenError:
         return None
+
+
+# ==================== 文件上传工具函数 ====================
+
+def save_upload_file(
+    *,
+    file_content: bytes,
+    filename: str,
+    subfolder: str = "",
+) -> str:
+    """
+    保存上传的文件到上传目录
+
+    Args:
+        file_content: 文件内容（字节）
+        filename: 原始文件名
+        subfolder: 子文件夹（如 contracts, invoices）
+
+    Returns:
+        保存后的文件相对路径
+    """
+    # 确保上传目录存在
+    upload_dir = Path(settings.UPLOAD_DIR)
+    if subfolder:
+        upload_dir = upload_dir / subfolder
+    upload_dir.mkdir(parents=True, exist_ok=True)
+
+    # 生成唯一的文件名（保留原始扩展名）
+    ext = Path(filename).suffix.lower().lstrip(".")
+    allowed_extensions = {value.lstrip(".") for value in settings.ALLOWED_EXTENSIONS}
+    if ext not in allowed_extensions:
+        raise ValueError(f"不支持的文件类型: .{ext}")
+    unique_filename = f"{uuid.uuid4()}.{ext}"
+    file_path = upload_dir / unique_filename
+
+    # 保存文件
+    file_path.write_bytes(file_content)
+
+    # 返回相对路径
+    relative_path = file_path.relative_to(Path(settings.UPLOAD_DIR))
+    return str(relative_path)
+
+
+def delete_file(file_path: str) -> bool:
+    """
+    删除文件
+
+    Args:
+        file_path: 文件相对路径
+
+    Returns:
+        是否成功删除
+    """
+    try:
+        full_path = Path(settings.UPLOAD_DIR) / file_path
+        if full_path.exists():
+            full_path.unlink()
+            return True
+        return False
+    except Exception:
+        return False
+
+
+def get_file_url(file_path: str) -> str:
+    """
+    获取文件的访问URL
+
+    Args:
+        file_path: 文件相对路径
+
+    Returns:
+        文件的访问URL
+    """
+    # 这里可以根据实际情况调整，返回静态文件服务URL
+    return f"/api/v1/files/{file_path}"

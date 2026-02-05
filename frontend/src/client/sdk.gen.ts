@@ -3,7 +3,344 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { ItemsReadItemsData, ItemsReadItemsResponse, ItemsCreateItemData, ItemsCreateItemResponse, ItemsReadItemData, ItemsReadItemResponse, ItemsUpdateItemData, ItemsUpdateItemResponse, ItemsDeleteItemData, ItemsDeleteItemResponse, LoginLoginAccessTokenData, LoginLoginAccessTokenResponse, LoginTestTokenResponse, LoginRecoverPasswordData, LoginRecoverPasswordResponse, LoginResetPasswordData, LoginResetPasswordResponse, LoginRecoverPasswordHtmlContentData, LoginRecoverPasswordHtmlContentResponse, PrivateCreateUserData, PrivateCreateUserResponse, UsersReadUsersData, UsersReadUsersResponse, UsersCreateUserData, UsersCreateUserResponse, UsersReadUserMeResponse, UsersDeleteUserMeResponse, UsersUpdateUserMeData, UsersUpdateUserMeResponse, UsersUpdatePasswordMeData, UsersUpdatePasswordMeResponse, UsersRegisterUserData, UsersRegisterUserResponse, UsersReadUserByIdData, UsersReadUserByIdResponse, UsersUpdateUserData, UsersUpdateUserResponse, UsersDeleteUserData, UsersDeleteUserResponse, UtilsTestEmailData, UtilsTestEmailResponse, UtilsHealthCheckResponse } from './types.gen';
+import type { ContractsReadContractProjectsData, ContractsReadContractProjectsResponse, ContractsCreateContractProjectData, ContractsCreateContractProjectResponse, ContractsReadContractProjectData, ContractsReadContractProjectResponse, ContractsUpdateContractProjectData, ContractsUpdateContractProjectResponse, ContractsDeleteContractProjectData, ContractsDeleteContractProjectResponse, ContractsReadContractsByProjectData, ContractsReadContractsByProjectResponse, ContractsReadContractData, ContractsReadContractResponse, ContractsUpdateContractData, ContractsUpdateContractResponse, ContractsDeleteContractData, ContractsDeleteContractResponse, ContractsCreateContractData, ContractsCreateContractResponse, ContractsReadInvoicesByContractData, ContractsReadInvoicesByContractResponse, ContractsReadInvoiceData, ContractsReadInvoiceResponse, ContractsUpdateInvoiceData, ContractsUpdateInvoiceResponse, ContractsDeleteInvoiceData, ContractsDeleteInvoiceResponse, ContractsCreateInvoiceData, ContractsCreateInvoiceResponse, ItemsReadItemsData, ItemsReadItemsResponse, ItemsCreateItemData, ItemsCreateItemResponse, ItemsReadItemData, ItemsReadItemResponse, ItemsUpdateItemData, ItemsUpdateItemResponse, ItemsDeleteItemData, ItemsDeleteItemResponse, LoginLoginAccessTokenData, LoginLoginAccessTokenResponse, LoginTestTokenResponse, LoginRecoverPasswordData, LoginRecoverPasswordResponse, LoginResetPasswordData, LoginResetPasswordResponse, LoginRecoverPasswordHtmlContentData, LoginRecoverPasswordHtmlContentResponse, PrivateCreateUserData, PrivateCreateUserResponse, UsersReadUsersData, UsersReadUsersResponse, UsersCreateUserData, UsersCreateUserResponse, UsersReadUserMeResponse, UsersDeleteUserMeResponse, UsersUpdateUserMeData, UsersUpdateUserMeResponse, UsersUpdatePasswordMeData, UsersUpdatePasswordMeResponse, UsersRegisterUserData, UsersRegisterUserResponse, UsersReadUserByIdData, UsersReadUserByIdResponse, UsersUpdateUserData, UsersUpdateUserResponse, UsersDeleteUserData, UsersDeleteUserResponse, UtilsTestEmailData, UtilsTestEmailResponse, UtilsHealthCheckResponse } from './types.gen';
+
+export class ContractsService {
+    /**
+     * Read Contract Projects
+     * 获取合同项目列表
+     * @param data The data for the request.
+     * @param data.skip
+     * @param data.limit
+     * @returns ContractProjectsPublic Successful Response
+     * @throws ApiError
+     */
+    public static readContractProjects(data: ContractsReadContractProjectsData = {}): CancelablePromise<ContractsReadContractProjectsResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/contracts/projects',
+            query: {
+                skip: data.skip,
+                limit: data.limit
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Create Contract Project
+     * 创建新的合同项目
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @returns ContractProjectPublic Successful Response
+     * @throws ApiError
+     */
+    public static createContractProject(data: ContractsCreateContractProjectData): CancelablePromise<ContractsCreateContractProjectResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/v1/contracts/projects',
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Read Contract Project
+     * 获取单个合同项目
+     * @param data The data for the request.
+     * @param data.id
+     * @returns ContractProjectPublic Successful Response
+     * @throws ApiError
+     */
+    public static readContractProject(data: ContractsReadContractProjectData): CancelablePromise<ContractsReadContractProjectResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/contracts/projects/{id}',
+            path: {
+                id: data.id
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Update Contract Project
+     * 更新合同项目
+     * @param data The data for the request.
+     * @param data.id
+     * @param data.requestBody
+     * @returns ContractProjectPublic Successful Response
+     * @throws ApiError
+     */
+    public static updateContractProject(data: ContractsUpdateContractProjectData): CancelablePromise<ContractsUpdateContractProjectResponse> {
+        return __request(OpenAPI, {
+            method: 'PUT',
+            url: '/api/v1/contracts/projects/{id}',
+            path: {
+                id: data.id
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete Contract Project
+     * 删除合同项目（级联删除相关合同和发票）
+     * @param data The data for the request.
+     * @param data.id
+     * @returns Message Successful Response
+     * @throws ApiError
+     */
+    public static deleteContractProject(data: ContractsDeleteContractProjectData): CancelablePromise<ContractsDeleteContractProjectResponse> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/api/v1/contracts/projects/{id}',
+            path: {
+                id: data.id
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Read Contracts By Project
+     * 获取指定项目的合同列表
+     * @param data The data for the request.
+     * @param data.projectId
+     * @param data.skip
+     * @param data.limit
+     * @returns ContractsPublic Successful Response
+     * @throws ApiError
+     */
+    public static readContractsByProject(data: ContractsReadContractsByProjectData): CancelablePromise<ContractsReadContractsByProjectResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/contracts/project/{project_id}',
+            path: {
+                project_id: data.projectId
+            },
+            query: {
+                skip: data.skip,
+                limit: data.limit
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Read Contract
+     * 获取单个合同
+     * @param data The data for the request.
+     * @param data.id
+     * @returns ContractPublic Successful Response
+     * @throws ApiError
+     */
+    public static readContract(data: ContractsReadContractData): CancelablePromise<ContractsReadContractResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/contracts/{id}',
+            path: {
+                id: data.id
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Update Contract
+     * 更新合同（可选重新上传文件并解析）
+     * @param data The data for the request.
+     * @param data.id
+     * @param data.formData
+     * @returns ContractPublic Successful Response
+     * @throws ApiError
+     */
+    public static updateContract(data: ContractsUpdateContractData): CancelablePromise<ContractsUpdateContractResponse> {
+        return __request(OpenAPI, {
+            method: 'PUT',
+            url: '/api/v1/contracts/{id}',
+            path: {
+                id: data.id
+            },
+            formData: data.formData,
+            mediaType: 'multipart/form-data',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete Contract
+     * 删除合同（级联删除相关发票）
+     * @param data The data for the request.
+     * @param data.id
+     * @returns Message Successful Response
+     * @throws ApiError
+     */
+    public static deleteContract(data: ContractsDeleteContractData): CancelablePromise<ContractsDeleteContractResponse> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/api/v1/contracts/{id}',
+            path: {
+                id: data.id
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Create Contract
+     * 创建新合同（可选上传文件并自动解析）
+     * @param data The data for the request.
+     * @param data.formData
+     * @returns ContractPublic Successful Response
+     * @throws ApiError
+     */
+    public static createContract(data: ContractsCreateContractData): CancelablePromise<ContractsCreateContractResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/v1/contracts/',
+            formData: data.formData,
+            mediaType: 'multipart/form-data',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Read Invoices By Contract
+     * 获取指定合同的发票列表
+     * @param data The data for the request.
+     * @param data.contractId
+     * @param data.skip
+     * @param data.limit
+     * @returns InvoicesPublic Successful Response
+     * @throws ApiError
+     */
+    public static readInvoicesByContract(data: ContractsReadInvoicesByContractData): CancelablePromise<ContractsReadInvoicesByContractResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/contracts/{contract_id}/invoices',
+            path: {
+                contract_id: data.contractId
+            },
+            query: {
+                skip: data.skip,
+                limit: data.limit
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Read Invoice
+     * 获取单个发票
+     * @param data The data for the request.
+     * @param data.id
+     * @returns InvoicePublic Successful Response
+     * @throws ApiError
+     */
+    public static readInvoice(data: ContractsReadInvoiceData): CancelablePromise<ContractsReadInvoiceResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/contracts/invoices/{id}',
+            path: {
+                id: data.id
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Update Invoice
+     * 更新发票（可选重新上传文件并解析）
+     * @param data The data for the request.
+     * @param data.id
+     * @param data.formData
+     * @returns InvoicePublic Successful Response
+     * @throws ApiError
+     */
+    public static updateInvoice(data: ContractsUpdateInvoiceData): CancelablePromise<ContractsUpdateInvoiceResponse> {
+        return __request(OpenAPI, {
+            method: 'PUT',
+            url: '/api/v1/contracts/invoices/{id}',
+            path: {
+                id: data.id
+            },
+            formData: data.formData,
+            mediaType: 'multipart/form-data',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete Invoice
+     * 删除发票
+     * @param data The data for the request.
+     * @param data.id
+     * @returns Message Successful Response
+     * @throws ApiError
+     */
+    public static deleteInvoice(data: ContractsDeleteInvoiceData): CancelablePromise<ContractsDeleteInvoiceResponse> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/api/v1/contracts/invoices/{id}',
+            path: {
+                id: data.id
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Create Invoice
+     * 创建新发票（可选上传文件并自动解析）
+     * @param data The data for the request.
+     * @param data.formData
+     * @returns InvoicePublic Successful Response
+     * @throws ApiError
+     */
+    public static createInvoice(data: ContractsCreateInvoiceData): CancelablePromise<ContractsCreateInvoiceResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/v1/contracts/invoices',
+            formData: data.formData,
+            mediaType: 'multipart/form-data',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+}
 
 export class ItemsService {
     /**

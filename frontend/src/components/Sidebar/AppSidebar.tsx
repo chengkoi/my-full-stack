@@ -1,4 +1,4 @@
-import { Briefcase, Home, Users } from "lucide-react"
+import { Briefcase, FileText, Home, Users } from "lucide-react"
 
 import { SidebarAppearance } from "@/components/Common/Appearance"
 import { Logo } from "@/components/Common/Logo"
@@ -15,6 +15,7 @@ import { User } from "./User"
 const baseItems: Item[] = [
   { icon: Home, title: "仪表盘", path: "/" },
   { icon: Briefcase, title: "项目", path: "/items" },
+  { icon: FileText, title: "合同审批", path: "/contracts" },
 ]
 
 export function AppSidebar() {
